@@ -3,11 +3,6 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "features": {
-    "ghcr.io/devcontainers/features/python:1": {
-      "version": "3.11"
-    }
-  },
   "postCreateCommand": "bash -c 'pip install jupyter notebook ipython && magic install mojo || echo Magic installation will be handled separately'",
   "forwardPorts": [8888],
   "customizations": {
