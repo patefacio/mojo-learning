@@ -3,7 +3,7 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "postCreateCommand": "pip install jupyter notebook ipython && magic install mojo || echo 'Magic installation will be handled separately'",
+  "postCreateCommand": "pip3 install jupyter notebook ipython && magic install mojo || echo 'Magic installation will be handled separately'",
   "forwardPorts": [8888],
   "customizations": {
     "vscode": {
@@ -11,8 +11,8 @@
     }
   },
   "containerEnv": {
-    "MAGIC_DIR": "/home/codespace/.modular",
-    "PATH": "/home/codespace/.modular/bin:${PATH}"
+    "MAGIC_DIR": "/root/.modular",
+    "PATH": "/root/.modular/bin:${PATH}"
   },
-  "remoteUser": "codespace"
+  "remoteUser": "root"
 }
