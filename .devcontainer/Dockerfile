@@ -14,7 +14,16 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     ca-certificates \
+    coreutils \
+    util-linux \
+    procps \
+    dash \
     && rm -rf /var/lib/apt/lists/*
+
+# Ensure sleep command is available in multiple locations for compatibility
+RUN ln -sf /usr/bin/sleep /bin/sleep && \
+    ln -sf /usr/bin/sleep /usr/local/bin/sleep && \
+    which sleep && sleep 1
 
 # Install Magic CLI
 RUN curl -ssL https://magic.modular.com | bash
@@ -22,11 +31,4 @@ RUN curl -ssL https://magic.modular.com | bash
 # Create working directory
 WORKDIR /workspace
 
-# Set default shell to bash
-SHELL ["/bin/bash", "-c"]
-
-# Create a simple entrypoint script to handle initialization
-RUN echo '#!/bin/bash\nset -e\nexec "$@"' > /entrypoint.sh && chmod +x /entrypoint.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["/bin/bash"]
+# Note: Mojo installation will be done in postCreateCommand to handle authentication properly
