@@ -8,15 +8,11 @@
       "version": "3.11"
     }
   },
-  "postCreateCommand": "pip install jupyter notebook ipython",
+  "postCreateCommand": "pip install jupyter notebook ipython && magic install mojo",
   "forwardPorts": [8888],
   "customizations": {
     "vscode": {
-      "extensions": [
-        "ms-python.python",
-        "ms-toolsai.jupyter",
-        "modular-mojotools.vscode-mojo"
-      ]
+      "extensions": ["ms-python.python", "ms-toolsai.jupyter"]
     }
   },
   "containerEnv": {

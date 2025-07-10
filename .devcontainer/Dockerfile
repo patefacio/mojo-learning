@@ -15,9 +15,9 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Magic CLI and Mojo
+# Install Magic CLI and set up Mojo
 RUN curl -ssL https://magic.modular.com | bash && \
-    /root/.modular/bin/magic install mojo
+    /root/.modular/bin/magic --version
 
 # Set up environment for Magic and Mojo
 ENV PATH="/root/.modular/bin:$PATH"
@@ -25,5 +25,4 @@ ENV PATH="/root/.modular/bin:$PATH"
 # Create working directory
 WORKDIR /workspace
 
-# Verify installation
-RUN magic --version && mojo --version
+# Note: Mojo installation will be done in postCreateCommand to handle authentication properly
