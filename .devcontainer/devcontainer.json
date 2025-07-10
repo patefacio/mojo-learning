@@ -1,9 +1,7 @@
 {
   "name": "Mojo Learning Environment",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
-  "postCreateCommand": "bash -c 'curl -ssL https://magic.modular.com | bash && export PATH=\"$HOME/.modular/bin:$PATH\" && pip3 install jupyter notebook ipython && magic install mojo || echo \"Mojo installation requires authentication - run magic install mojo manually\"'",
+  "image": "mcr.microsoft.com/devcontainers/base:debian",
+  "postCreateCommand": "curl -ssL https://magic.modular.com | bash && export PATH=\"$HOME/.modular/bin:$PATH\" && pip3 install jupyter notebook ipython && magic install mojo || echo 'Mojo installation requires authentication - run: magic install mojo'",
   "forwardPorts": [8888],
   "customizations": {
     "vscode": {
@@ -11,8 +9,8 @@
     }
   },
   "containerEnv": {
-    "MAGIC_DIR": "/root/.modular",
-    "PATH": "/root/.modular/bin:${PATH}"
+    "MAGIC_DIR": "/home/vscode/.modular",
+    "PATH": "/home/vscode/.modular/bin:${PATH}"
   },
-  "remoteUser": "root"
+  "remoteUser": "vscode"
 }
