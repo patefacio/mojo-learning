@@ -3,7 +3,7 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "postCreateCommand": "pip3 install jupyter notebook ipython && magic install mojo || echo 'Magic installation will be handled separately'",
+  "postCreateCommand": "bash -c 'curl -ssL https://magic.modular.com | bash && export PATH=\"$HOME/.modular/bin:$PATH\" && pip3 install jupyter notebook ipython && magic install mojo || echo \"Mojo installation requires authentication - run magic install mojo manually\"'",
   "forwardPorts": [8888],
   "customizations": {
     "vscode": {
