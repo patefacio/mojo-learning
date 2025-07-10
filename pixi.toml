@@ -3,20 +3,27 @@ name = "mojo-learning"
 version = "0.1.0"
 description = "A learning environment for Mojo programming language"
 authors = ["Your Name <your.email@example.com>"]
-channels = ["conda-forge", "https://conda.modular.com/max"]
-platforms = ["linux-64", "osx-64", "osx-arm64"]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
 
 [dependencies]
-max = "*"
 python = ">=3.9"
 jupyter = "*"
 ipython = "*"
 notebook = "*"
+curl = "*"
+wget = "*"
 
 [tasks]
 start-jupyter = "jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root"
-hello-mojo = "echo 'print(\"Hello from Mojo!\")' > hello.mojo && mojo hello.mojo"
+hello-python = "echo 'print(\"Hello from Python!\")' > hello.py && python hello.py"
+install-max = "curl -ssL https://magic.modular.com/max-install | bash"
+setup-max = "echo 'Run: magic run install-max' && echo 'Then: source ~/.bashrc' && echo 'Then: max --version'"
 
 [feature.dev.dependencies]
 pytest = "*"
 black = "*"
+
+[environments]
+default = ["default"]
+dev = ["default", "dev"]
