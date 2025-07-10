@@ -19,11 +19,3 @@ start-jupyter = "jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-
 hello-python = "echo 'print(\"Hello from Python!\")' > hello.py && python hello.py"
 install-max = "curl -ssL https://magic.modular.com/max-install | bash"
 setup-max = "echo 'Run: magic run install-max' && echo 'Then: source ~/.bashrc' && echo 'Then: max --version'"
-
-[feature.dev.dependencies]
-pytest = "*"
-black = "*"
-
-[environments]
-default = ["default"]
-dev = ["default", "dev"]
