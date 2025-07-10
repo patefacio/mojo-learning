@@ -36,16 +36,41 @@ source ~/.bashrc
 magic --version
 ```
 
-### 5. Install Mojo
+### 5. Check Magic CLI syntax and install Mojo
+The Magic CLI syntax may have changed. First, check what options are available:
+
 ```bash
-magic install mojo
+magic --help
+magic install --help
 ```
 
-**Note:** This step may require authentication. If prompted, follow the instructions to authenticate with Modular.
+Try one of these commands to install Mojo:
+```bash
+# Option 1: Try the basic install command
+magic install
+
+# Option 2: If that doesn't work, try:
+magic auth
+magic install
+
+# Option 3: Check if there's a specific package name
+magic search mojo
+magic install max  # MAX might be the package name now
+```
+
+**Note:** The Magic CLI has evolved, so the exact syntax may differ. Follow any authentication prompts that appear.
 
 ### 6. Verify Mojo installation
 ```bash
 mojo --version
+```
+
+If `mojo` command is not found, try:
+```bash
+# Check if it's installed under a different name
+which mojo
+ls ~/.modular/bin/
+max --version  # MAX might be the new name
 ```
 
 ## Step 3: Test Your Setup
@@ -81,6 +106,9 @@ Then access it via the forwarded port in your codespace.
 - Make sure Magic CLI is properly installed and in your PATH
 - Try running `magic auth` to authenticate first
 - Check if you have access to Mojo (may require signing up at modular.com)
+- The Magic CLI syntax has changed - try `magic install` without arguments first
+- Look for error messages about required authentication or package names
+- Try `magic search` to see available packages
 
 ### If PATH issues persist:
 - Restart your terminal or create a new terminal session
@@ -114,3 +142,5 @@ Then access it via the forwarded port in your codespace.
 - All Mojo-related tools are installed manually after the codespace starts
 - The environment should be stable and persistent across codespace sessions
 - Remember to authenticate with Modular if prompted during Mojo installation
+- The Magic CLI syntax has evolved - use `magic --help` to see current options
+- You may need to install "MAX" instead of "mojo" directly
