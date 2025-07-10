@@ -8,11 +8,20 @@
       "version": "3.11"
     }
   },
-  "postCreateCommand": "pip install jupyter notebook",
+  "postCreateCommand": "pip install jupyter notebook ipython",
   "forwardPorts": [8888],
   "customizations": {
     "vscode": {
-      "extensions": ["ms-python.python", "ms-toolsai.jupyter"]
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "modular-mojotools.vscode-mojo"
+      ]
     }
-  }
+  },
+  "containerEnv": {
+    "MAGIC_DIR": "/root/.modular",
+    "PATH": "/root/.modular/bin:${PATH}"
+  },
+  "remoteUser": "root"
 }
