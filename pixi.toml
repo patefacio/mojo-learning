@@ -3,7 +3,7 @@ name = "mojo-learning"
 version = "0.1.0"
 description = "A learning environment for Mojo programming language"
 authors = ["Your Name <your.email@example.com>"]
-channels = ["conda-forge"]
+channels = ["conda-forge", "https://conda.modular.com/max-nightly/"]
 platforms = ["linux-64"]
 
 [dependencies]
@@ -13,10 +13,11 @@ ipython = "*"
 notebook = "*"
 curl = "*"
 wget = "*"
+modular = "*"
 
 [tasks]
 start-jupyter = "jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root"
 hello-python = "echo 'print(\"Hello from Python!\")' > hello.py && python hello.py"
-install-max = "echo 'Installing MAX...' && echo 'Visit https://modul.ar/get-started for MAX installation' && echo 'You may need to sign up for access to MAX and Mojo'"
-setup-instructions = "echo 'MAX Installation Instructions:' && echo '1. Visit https://modul.ar/get-started' && echo '2. Sign up for access if needed' && echo '3. Follow the installation guide for your system' && echo '4. MAX includes Mojo compiler'"
-check-max = "which max && max --version || echo 'MAX not found - visit https://modul.ar/get-started for installation'"
+hello-mojo = "echo 'print(\"Hello from Mojo!\")' > hello.mojo && mojo hello.mojo"
+check-mojo = "which mojo && mojo --version || echo 'Mojo not found - try: pixi shell'"
+check-max = "which max && max --version || echo 'MAX not found - try: pixi shell'"
