@@ -2,8 +2,10 @@ FROM ubuntu:22.04
 
 # Set environment variables to avoid interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
+ENV MAGIC_DIR=/root/.modular
+ENV PATH="/root/.modular/bin:$PATH"
 
-# Update package lists and install essential dependencies including coreutils
+# Update package lists and install essential dependencies
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
@@ -18,11 +20,17 @@ RUN apt-get update && apt-get install -y \
     bash \
     && rm -rf /var/lib/apt/lists/*
 
-# Verify sleep command is available and create symlinks for safety
-RUN which sleep && sleep 1 && \
-    ln -sf /usr/bin/sleep /bin/sleep 2>/dev/null || true
+# Install Magic CLI
+RUN curl -ssL https://magic.modular.com | bash
+
+# Install Python packages
+RUN pip3 install jupyter notebook ipython
 
 # Create working directory
 WORKDIR /workspace
 
-# Note: Magic CLI and Mojo installation will be done in postCreateCommand
+# Expose Jupyter port
+EXPOSE 8888
+
+# Default command
+CMD ["/bin/bash"]

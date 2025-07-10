@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  mojo-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.simple
+    container_name: mojo-learning-dev
+    volumes:
+      - .:/workspace
+      - mojo-cache:/root/.modular
+    working_dir: /workspace
+    ports:
+      - "8888:8888"
+    environment:
+      - MAGIC_DIR=/root/.modular
+      - PATH=/root/.modular/bin:$PATH
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+
+volumes:
+  mojo-cache:
