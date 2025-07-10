@@ -4,7 +4,16 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV MAGIC_DIR=/root/.modular
 
-# Install system dependencies including coreutils for sleep command
+# Update package lists and install essential system utilities first
+RUN apt-get update && apt-get install -y \
+    coreutils \
+    util-linux \
+    procps \
+    bash \
+    zsh \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install development dependencies
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
@@ -13,10 +22,10 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     ca-certificates \
-    coreutils \
-    bash \
-    zsh \
     && rm -rf /var/lib/apt/lists/*
+
+# Verify essential commands are available
+RUN uname -m && sleep 1 && echo "Basic utilities verified"
 
 # Install Magic CLI
 RUN curl -ssL https://magic.modular.com | bash
