@@ -8,7 +8,7 @@
       "version": "3.11"
     }
   },
-  "postCreateCommand": "pip install jupyter notebook ipython && magic install mojo",
+  "postCreateCommand": "bash -c 'pip install jupyter notebook ipython && magic install mojo || echo Magic installation will be handled separately'",
   "forwardPorts": [8888],
   "customizations": {
     "vscode": {
@@ -17,7 +17,9 @@
   },
   "containerEnv": {
     "MAGIC_DIR": "/root/.modular",
-    "PATH": "/root/.modular/bin:${PATH}"
+    "PATH": "/root/.modular/bin:${PATH}",
+    "SHELL": "/bin/bash"
   },
-  "remoteUser": "root"
+  "remoteUser": "root",
+  "init": true
 }

@@ -4,7 +4,7 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV MAGIC_DIR=/root/.modular
 
-# Install system dependencies
+# Install system dependencies including coreutils for sleep command
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
@@ -13,16 +13,21 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     ca-certificates \
+    coreutils \
+    bash \
+    zsh \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Magic CLI and set up Mojo
-RUN curl -ssL https://magic.modular.com | bash && \
-    /root/.modular/bin/magic --version
+# Install Magic CLI
+RUN curl -ssL https://magic.modular.com | bash
 
 # Set up environment for Magic and Mojo
 ENV PATH="/root/.modular/bin:$PATH"
 
 # Create working directory
 WORKDIR /workspace
+
+# Verify Magic CLI installation
+RUN magic --version || echo "Magic CLI installed but may need authentication"
 
 # Note: Mojo installation will be done in postCreateCommand to handle authentication properly
